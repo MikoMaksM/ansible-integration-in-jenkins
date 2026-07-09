@@ -1,12 +1,24 @@
-## CD - Deploy Application from Jenkins Pipeline to EC2 Instance (automatically with docker)
+## Ansible Integration in Jenkins
 
 This project was a part of the TWN DevOps Bootcamp.
 
+Project demonstrates a complete CI/CD pipeline integrating **Jenkins** and **Ansible** to automatically configure **AWS EC2 instances**
+
 ## Technologies used:
-AWS, Jenkins, Docker, Linux, Git, Java, Maven, Docker Hub
+![img.png](img.png) 
 
 ## Project Description:
-- Prepare AWS EC2 Instance for deployment (Install Docker)
-- Create ssh key credentials for EC2 server on Jenkins
-- Extend the previous CI pipeline with deploy step to ssh into the remote EC2 instance and deploy newly built image from Jenkins server
-- Configure security group on EC2 Instance to allow access to our web application
+- Create and configure a dedicated server for Jenkins
+- Create and configure a dedicated server for Ansible Control Node
+- Write Ansible Playbook, which configures 2 EC2 Instances
+- Add ssh key file credentials in Jenkins for Ansible Control Node server and Ansible Managed Node
+  servers
+- Configure Jenkins to execute the Ansible Playbook on remote Ansible Control Node server as
+  part of the CI/CD pipeline
+- Jenkinsfile configuration will do the following:
+ a) Connect to the remote Ansible Control Node server
+ b) Copy Ansible playbook and configuration files to the remote Ansible Control Node server
+ c) Copy the ssh keys for the Ansible Managed Node servers to the Ansible Control Node server
+ d) Install Ansible, Python3 and Boto3 on the Ansible Control Node server
+ e) With everything installed and copied to the remote Ansible Control Node server, execute the
+  playbook remotely on that Control Node that will configure the 2 EC2 Managed Nodes
